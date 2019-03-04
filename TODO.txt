@@ -1,0 +1,26 @@
+Track overdue demo - TEST
+Track orders by units' serial number - TEST
+Generate report for Due Date Demo
+
+Outstanding Demo - active, not yet due for pull-out
+In-house Demo - Outstanding Demo but internal use
+Due Date Demo - due for pull-out
+Pull-out - tracking pull-out activity
+Returned Demo - history of orders returned
+
+Order
+- Client
+- Units, Accessories
+	- quantity
+	- serial number
+	- unit parts
+	- source
+		- warehouse
+		- demo asset
+		- rental asset
+		- supplier
+	- remarks
+- RFD
+- ARD/WDAF
+- Account Manager
+- Date Ordered and Date Due, Remarks
