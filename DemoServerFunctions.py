@@ -65,15 +65,15 @@ def FlushCursor(sqlcursor):
 	
 def ViewOrders(sqlcursor, connection):
 	for (OrderID, Client, RFD, ARD, AccountManager, Status, ListID, DateOrdered, DateDue, Remarks) in sqlcursor:
-		connection.sendall(("{}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::\n").format(OrderID, Client, RFD, ARD, AccountManager, Status, ListID, DateOrdered, DateDue, Remarks))
 		#print(("{}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::\n").format(OrderID, Client, RFD, ARD, AccountManager, Status, ListID, DateOrdered, DateDue, Remarks))
+		connection.sendall(("{}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::\n").format(OrderID, Client, RFD, ARD, AccountManager, Status, ListID, DateOrdered, DateDue, Remarks))
 		
 def ViewItemsSingle(sqlcursor, connection):
 	for (ItemID, Name, Quantity, Serial, Source, Remarks, Status) in sqlcursor:
 		connection.sendall(("{}::, {}::, {}::, {}::, {}::, {}::, {}::\n").format(ItemID, Name, Quantity, Serial, Source, Remarks, Status))
-		print(("{}::, {}::, {}::, {}::, {}::, {}::, {}::\n").format(ItemID, Name, Quantity, Serial, Source, Remarks, Status))
+		#print(("{}::, {}::, {}::, {}::, {}::, {}::, {}::\n").format(ItemID, Name, Quantity, Serial, Source, Remarks, Status))
 		
 def ViewUnits(sqlcursor, connection):
 	for (ListID, ItemID, Part) in sqlcursor:
 		connection.sendall(("{}::, {}::, {}::\n").format(ListID, ItemID, Part))
-		print(("{}::, {}::, {}::\n").format(ListID, ItemID, Part))
+		#print(("{}::, {}::, {}::\n").format(ListID, ItemID, Part))

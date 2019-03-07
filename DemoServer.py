@@ -30,7 +30,7 @@ class DemoServer:
 		# connect to the database
 		try:
 			#cnx = mysql.connector.connect(**dbconfig)
-			cnxpool = mysql.connector.connect(pool_name = "admin_pool", pool_size = 3, **dbconfig)
+			cnxpool = mysql.connector.pooling.MySQLConnectionPool(pool_name = "admin_pool", pool_size = 5, **dbconfig)
 		except mysql.connector.Error as err:
 			if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
 				print("Something is wrong with your user name or password")
@@ -59,7 +59,8 @@ class DemoServer:
 				#			sys.stdout.flush()
 							
 				#self.listenToClient(client, address, cnx)
-				pooled_cnx = mysql.connector.connect(pool_name = "admin_pool")
+				#pooled_cnx = mysql.connector.connect(pool_name = "admin_pool")
+				pooled_cnx = cnxpool.get_connection()
 				threading.Thread(target = self.listenToClient,args = (client,address,pooled_cnx)).start()
 			cnx.close()
 		sys.stdout.flush()
@@ -85,7 +86,6 @@ class DemoServer:
 			#print "Entering while loop"			
 			#sys.stdout.flush()
 
-
 			# multiple HandleQueries should only be used for update/delete, not select queries
 			while i < len(user_message):
 				
@@ -100,14 +100,18 @@ class DemoServer:
 				#sys.stdout.flush()
 				
 				i += 2
-				
 		#end of processing
 		
+		print("Returning pool connection")
+		sys.stdout.flush()
 		cnx.close()
 		connection.close()
 	# end of function
 	
 def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_data=[]):
+	print("query: " + option)
+	sys.stdout.flush()
+
 	#execute query
 	if not insert_data:
 		sqlcursor.execute(make_query(option+'.sql'))
@@ -244,6 +248,7 @@ def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_dat
 		option == "ViewPullOutOrders" or
 		option == "ViewReturnedOrders" or
 		option == "ViewInHouseOrders" or
+		option == "ViewDueOrders" or
 		option == "FilterOrder" or
 		option == "FindOrder"):
 		ViewOrders(sqlcursor, client_connection)

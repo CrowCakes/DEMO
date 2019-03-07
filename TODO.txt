@@ -1,12 +1,12 @@
-Track overdue demo - TEST
-Track orders by units' serial number - TEST
-Generate report for Due Date Demo
+Track orders by units' serial number - DONE
+Generate report for Due Date Demo - DONE?
 
-Outstanding Demo - active, not yet due for pull-out
-In-house Demo - Outstanding Demo but internal use
-Due Date Demo - due for pull-out
-Pull-out - tracking pull-out activity
-Returned Demo - history of orders returned
+IMPLEMENT THESE VIEWS
+Outstanding Demo - active, not yet due for pull-out "Active"
+In-house Demo - Outstanding Demo but internal use "Internal"
+Due Date Demo - due for pull-out "Due," "Overdue"
+Pull-out - tracking pull-out activity "Returning"
+Returned Demo - history of orders returned "Returned"
 
 Order
 - Client

@@ -3,5 +3,5 @@ B.ListID, B.DateOrdered, B.DateDue, B.Remarks
 FROM DemoOrder as A 
 INNER JOIN DemoDuration as B
 ON A.OrderID = B.OrderID
-WHERE Status = "Active"
+WHERE (Status = "Active")
 ORDER BY A.OrderID, B.ListID
