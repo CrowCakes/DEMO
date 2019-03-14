@@ -102,15 +102,15 @@ class DemoServer:
 				i += 2
 		#end of processing
 		
-		print("Returning pool connection")
+		#print("Returning pool connection")
 		sys.stdout.flush()
 		cnx.close()
 		connection.close()
 	# end of function
 	
 def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_data=[]):
-	print("query: " + option)
-	sys.stdout.flush()
+	#print("query: " + option)
+	#sys.stdout.flush()
 
 	#execute query
 	if not insert_data:
@@ -135,6 +135,9 @@ def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_dat
 									'status': insert_data[4]}
 				
 				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+				sql_connection.commit()
+				
+				sqlcursor.execute(make_query("InsertNewOrderDateB.sql"), user_option_data)
 				sql_connection.commit()
 				client_connection.sendall("Successfully completed the operation!")
 				
@@ -217,12 +220,40 @@ def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_dat
 				sql_connection.commit()
 				client_connection.sendall("Successfully completed the operation!")
 			
-			elif (option):
-				user_option_data = {}
+			elif (option == "DeleteOrder"):
+				user_option_data = {'orderid': insert_data[0]}
 				
 				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
 				sql_connection.commit()
 				client_connection.sendall("Successfully completed the operation!")
+				
+			elif (option == "DeleteOrderDate"):
+				user_option_data = {'listid': insert_data[0]}
+				
+				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+				sql_connection.commit()
+				client_connection.sendall("Successfully completed the operation!")
+				
+			elif (option == "DeleteItem"):
+				user_option_data = {'itemid': insert_data[0]}
+				
+				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+				sql_connection.commit()
+				client_connection.sendall("Successfully completed the operation!")
+				
+			elif (option == "DeleteUnitPart"):
+				user_option_data = {'listid': insert_data[0]}
+				
+				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+				sql_connection.commit()
+				client_connection.sendall("Successfully completed the operation!")
+				
+			#elif (option):
+			#	user_option_data = {}
+			#	
+			#	sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+			#	sql_connection.commit()
+			#	client_connection.sendall("Successfully completed the operation!")
 				
 		except mysql.connector.Error as err:
 			print(datetime.datetime.now())
