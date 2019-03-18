@@ -1,4 +1,4 @@
-SELECT B.ListID, B.ItemID, B.Part
+SELECT B.ListID, B.ItemID, B.Part, B.Serial
 FROM DemoOrder AS A
 INNER JOIN DemoOrderUnits as C
 ON A.OrderID = C.OrderID

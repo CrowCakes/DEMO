@@ -1,5 +1,16 @@
-Track orders by units' serial number - DONE
-Generate report for Due Date Demo - DONE?
+Add Pull-out#, RR# to DemoOrder - DONE
+	- query - DONE
+	- server - DONE
+	- front-end - DONE
+Add Purchased status for items/units - DONE
+Fix date sorting - DONE
+Search by Unit Part Serial# - DONE
+	- Add Serial to UnitPart - DONE
+		- query - DONE
+		- server - DONE
+		- front-end - DONE
+	- query - DONE, modified FilterOrder
+Fix ViewDueOrders and ViewOverdueOrders - DONE
 
 IMPLEMENT THESE VIEWS
 Outstanding Demo - active, not yet due for pull-out "Active"
@@ -7,20 +18,3 @@ In-house Demo - Outstanding Demo but internal use "Internal"
 Due Date Demo - due for pull-out
 Pull-out - tracking pull-out activity "Pullout"
 Returned Demo - history of orders returned "Returned"
-
-Order
-- Client
-- Units, Accessories
-	- quantity
-	- serial number
-	- unit parts
-	- source
-		- warehouse
-		- demo asset
-		- rental asset
-		- supplier
-	- remarks
-- RFD
-- ARD/WDAF
-- Account Manager
-- Date Ordered and Date Due, Remarks

@@ -1,4 +1,4 @@
-SELECT A.*,
+SELECT A.OrderID, A.Client, A.RFD, A.ARD, A.AccountManager, A.PO, A.RR, A.Status,
 B.ListID, B.DateOrdered, B.DateDue, B.Remarks
 FROM DemoOrder as A 
 INNER JOIN DemoDuration as B
@@ -7,5 +7,7 @@ INNER JOIN DemoOrderUnits as C
 ON A.OrderID = C.OrderID
 INNER JOIN Items as D
 ON C.ItemID = D.ItemID
-WHERE D.Serial LIKE %(serial)s
-ORDER BY A.OrderID
+INNER JOIN UnitParts as E
+ON D.ItemID = E.ItemID
+WHERE D.Serial LIKE %(serial)s OR E.Serial LIKE %(serial)s
+ORDER BY A.OrderID, B.DateDue ASC

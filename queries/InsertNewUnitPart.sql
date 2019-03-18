@@ -1,2 +1,2 @@
-INSERT INTO UnitParts(ItemID, Part)
-VALUES (%(itemid)s, %(part)s)
+INSERT INTO UnitParts(ItemID, Part, Serial)
+VALUES (%(itemid)s, %(part)s, %(serial)s)

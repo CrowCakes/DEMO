@@ -9,6 +9,8 @@ CREATE TABLE DemoOrder (
 	RFD varchar(50),
 	ARD varchar(50),
 	AccountManager varchar(30),
+	PO varchar(20),
+	RR varchar(20),
 	Status varchar(15)
 );
 
@@ -38,6 +40,7 @@ CREATE TABLE UnitParts (
 	ListID int AUTO_INCREMENT PRIMARY KEY,
 	ItemID int,
 	Part varchar(100),
+	Serial varchar(30),
 	
 	FOREIGN KEY (ItemID) REFERENCES Items (ItemID)
 	ON UPDATE CASCADE 

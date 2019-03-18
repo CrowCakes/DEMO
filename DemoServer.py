@@ -132,7 +132,9 @@ def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_dat
 									'rfd': insert_data[1], 
 									'ard': insert_data[2], 
 									'accountmanager': insert_data[3], 
-									'status': insert_data[4]}
+									'po': insert_data[4], 
+									'rr': insert_data[5], 
+									'status': insert_data[6]}
 				
 				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
 				sql_connection.commit()
@@ -147,7 +149,9 @@ def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_dat
 									'rfd': insert_data[2], 
 									'ard': insert_data[3], 
 									'accountmanager': insert_data[4], 
-									'status': insert_data[5]}
+									'po': insert_data[5], 
+									'rr': insert_data[6],
+									'status': insert_data[7]}
 				
 				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
 				sql_connection.commit()
@@ -205,7 +209,8 @@ def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_dat
 			
 			elif (option == "InsertNewUnitPart"):
 				user_option_data = {'itemid': insert_data[0],
-									'part': insert_data[1]}
+									'part': insert_data[1],
+									'serial': insert_data[2]}
 				
 				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
 				sql_connection.commit()
@@ -214,7 +219,8 @@ def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_dat
 			elif (option == "EditUnitPart"):
 				user_option_data = {'listid': insert_data[0],
 									'itemid': insert_data[1],
-									'part': insert_data[2]}
+									'part': insert_data[2],
+									'serial': insert_data[3]}
 				
 				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
 				sql_connection.commit()
