@@ -79,27 +79,16 @@ class DemoServer:
 		else:
 			#print "Successfully parsed the message"
 			#sys.stdout.flush()
-
-			# iterate over all queries
-			i = 0
-
-			#print "Entering while loop"			
+				
+			cursor = cnx.cursor()
+				
+			with self.lock:
+				HandleQuery(user_message[0], cursor, connection, cnx, user_message[1])
+				
+			cursor.close()
+			
+			#print(user_message[i], user_message[i+1])
 			#sys.stdout.flush()
-
-			# multiple HandleQueries should only be used for update/delete, not select queries
-			while i < len(user_message):
-				
-				cursor = cnx.cursor()
-					
-				with self.lock:
-					HandleQuery(user_message[i], cursor, connection, cnx, user_message[i+1])
-					
-				cursor.close()
-				
-				#print(user_message[i], user_message[i+1])
-				#sys.stdout.flush()
-				
-				i += 2
 		#end of processing
 		
 		#print("Returning pool connection")
@@ -134,7 +123,8 @@ def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_dat
 									'accountmanager': insert_data[3], 
 									'po': insert_data[4], 
 									'rr': insert_data[5], 
-									'status': insert_data[6]}
+									'rts': insert_data[6],
+									'status': insert_data[7]}
 				
 				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
 				sql_connection.commit()
@@ -151,7 +141,8 @@ def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_dat
 									'accountmanager': insert_data[4], 
 									'po': insert_data[5], 
 									'rr': insert_data[6],
-									'status': insert_data[7]}
+									'rts': insert_data[7],
+									'status': insert_data[8]}
 				
 				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
 				sql_connection.commit()

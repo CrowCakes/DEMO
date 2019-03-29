@@ -11,6 +11,7 @@ CREATE TABLE DemoOrder (
 	AccountManager varchar(30),
 	PO varchar(20),
 	RR varchar(20),
+	RTS varchar(20),
 	Status varchar(15)
 );
 

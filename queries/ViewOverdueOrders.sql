@@ -1,4 +1,4 @@
-SELECT A.OrderID, A.Client, A.RFD, A.ARD, A.AccountManager, A.PO, A.RR, A.Status,
+SELECT A.OrderID, A.Client, A.RFD, A.ARD, A.AccountManager, A.PO, A.RR, A.RTS, A.Status,
 C.ListID, C.DateOrdered, C.DateDue, C.Remarks
 FROM DemoOrder as A 
 INNER JOIN 

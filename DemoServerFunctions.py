@@ -64,9 +64,9 @@ def FlushCursor(sqlcursor):
 	print("\r\n")
 	
 def ViewOrders(sqlcursor, connection):
-	for (OrderID, Client, RFD, ARD, AccountManager, PO, RR, Status, ListID, DateOrdered, DateDue, Remarks) in sqlcursor:
+	for (OrderID, Client, RFD, ARD, AccountManager, PO, RR, RTS, Status, ListID, DateOrdered, DateDue, Remarks) in sqlcursor:
 		#print(("{}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::\n").format(OrderID, Client, RFD, ARD, AccountManager, Status, ListID, DateOrdered, DateDue, Remarks))
-		connection.sendall(("{}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::\n").format(OrderID, Client, RFD, ARD, AccountManager, PO, RR, Status, ListID, DateOrdered, DateDue, Remarks))
+		connection.sendall(("{}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::, {}::\n").format(OrderID, Client, RFD, ARD, AccountManager, PO, RR, RTS, Status, ListID, DateOrdered, DateDue, Remarks))
 		
 def ViewItemsSingle(sqlcursor, connection):
 	for (ItemID, Name, Quantity, Serial, Source, Remarks, Status) in sqlcursor:
