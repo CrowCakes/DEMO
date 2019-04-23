@@ -39,7 +39,7 @@ class DemoServer:
 			else:
 				print(err)
 		else:
-			print("Server ready")
+			print("Server ready\n")
 			sys.stdout.flush()
 			while True:
 				client, address = self.sock.accept()
@@ -60,8 +60,18 @@ class DemoServer:
 							
 				#self.listenToClient(client, address, cnx)
 				#pooled_cnx = mysql.connector.connect(pool_name = "admin_pool")
-				pooled_cnx = cnxpool.get_connection()
-				threading.Thread(target = self.listenToClient,args = (client,address,pooled_cnx)).start()
+				running = True
+				while running:
+					try:
+						pooled_cnx = cnxpool.get_connection()
+						threading.Thread(target = self.listenToClient,args = (client,address,pooled_cnx)).start()
+						running = False
+					except mysql.connector.PoolError as err:
+						print(err)
+						print("\n")
+						
+						#client.sendall("The server is handling too many connections right now. Please inform the developer that you encountered this message, then try again later.")
+						pooled_cnx.close()
 			cnx.close()
 		sys.stdout.flush()
 	# end of function
@@ -82,8 +92,9 @@ class DemoServer:
 				
 			cursor = cnx.cursor()
 				
-			with self.lock:
-				HandleQuery(user_message[0], cursor, connection, cnx, user_message[1])
+			print(datetime.datetime.now())
+			print("Received command " + user_message[0] + " with " + str(len(user_message[1])) + " parameters\n")
+			HandleQuery(user_message[0], cursor, connection, cnx, user_message[1])
 				
 			cursor.close()
 			

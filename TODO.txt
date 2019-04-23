@@ -1,9 +1,2 @@
-Add RTS# - PORT OVER
-	- database DONE
-	- query DONE
-	- server DONE
-	- front-end WAIT
-
-fixed Login function to check against more general fields
-fixed ItemPanel interaction with PartPanel
-fixed PartPanel not including serial number in query message
+users appear to be entering very long serial numbers
+added a try-except while loop to wait for pool to replenish connections
