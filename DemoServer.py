@@ -118,7 +118,7 @@ def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_dat
 	else:
 		try:
 			if (option == "FilterOrder"):
-				user_option_data = {'serial': ("%{}%").format(insert_data[0])}
+				user_option_data = {'serial': insert_data[0]}
 				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
 				
 			elif (option == "ViewItemsSingle" or 

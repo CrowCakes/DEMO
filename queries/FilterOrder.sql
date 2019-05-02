@@ -9,5 +9,5 @@ INNER JOIN Items as D
 ON C.ItemID = D.ItemID
 INNER JOIN UnitParts as E
 ON D.ItemID = E.ItemID
-WHERE D.Serial LIKE %(serial)s OR E.Serial LIKE %(serial)s
+WHERE D.Serial REGEXP %(serial)s OR E.Serial REGEXP %(serial)s
 ORDER BY A.OrderID, B.DateDue ASC

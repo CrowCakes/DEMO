@@ -31,7 +31,7 @@ CREATE TABLE Items (
 	ItemID int AUTO_INCREMENT PRIMARY KEY,
 	Name varchar(150),
 	Quantity int,
-	Serial varchar(30),
+	Serial varchar(100),
 	Source varchar(100),
 	Remarks varchar(300),
 	Status varchar(15)
@@ -41,7 +41,7 @@ CREATE TABLE UnitParts (
 	ListID int AUTO_INCREMENT PRIMARY KEY,
 	ItemID int,
 	Part varchar(100),
-	Serial varchar(30),
+	Serial varchar(100),
 	
 	FOREIGN KEY (ItemID) REFERENCES Items (ItemID)
 	ON UPDATE CASCADE 
