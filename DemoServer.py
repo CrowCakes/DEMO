@@ -128,105 +128,200 @@ def HandleQuery(option, sqlcursor, client_connection, sql_connection, insert_dat
 				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
 				
 			elif (option == "InsertNewOrder"):
-				user_option_data = {'client': insert_data[0], 
-									'rfd': insert_data[1], 
-									'ard': insert_data[2], 
-									'accountmanager': insert_data[3], 
-									'po': insert_data[4], 
-									'rr': insert_data[5], 
-									'rts': insert_data[6],
-									'status': insert_data[7]}
-				
-				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
-				sql_connection.commit()
-				
-				sqlcursor.execute(make_query("InsertNewOrderDateB.sql"), user_option_data)
-				sql_connection.commit()
-				client_connection.sendall("Successfully completed the operation!")
+				if (len(insert_data[0]) <= 50 and
+					len(insert_data[1]) <= 50 and
+					len(insert_data[2]) <= 50 and
+					len(insert_data[3]) <= 30 and
+					len(insert_data[4]) <= 20 and
+					len(insert_data[5]) <= 20 and
+					len(insert_data[6]) <= 20 and
+					len(insert_data[7]) <= 15):
+					user_option_data = {'client': insert_data[0], 
+										'rfd': insert_data[1], 
+										'ard': insert_data[2], 
+										'accountmanager': insert_data[3], 
+										'po': insert_data[4], 
+										'rr': insert_data[5], 
+										'rts': insert_data[6],
+										'status': insert_data[7]}
+					
+					sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+					sql_connection.commit()
+					
+					sqlcursor.execute(make_query("InsertNewOrderDateB.sql"), user_option_data)
+					sql_connection.commit()
+					client_connection.sendall("Successfully completed the operation!")
+				else:
+					client_connection.sendall("Something's wrong with the data sent")
+					print(datetime.datetime.now())
+					print("Something's wrong with the data sent")
+					print(insert_data)
+					print("\n")
 				
 			elif (option == "EditOrder"):
-				user_option_data = {'orderid': insert_data[0],
-									'client': insert_data[1], 
-									'rfd': insert_data[2], 
-									'ard': insert_data[3], 
-									'accountmanager': insert_data[4], 
-									'po': insert_data[5], 
-									'rr': insert_data[6],
-									'rts': insert_data[7],
-									'status': insert_data[8]}
-				
-				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
-				sql_connection.commit()
-				client_connection.sendall("Successfully completed the operation!")
+				if (str.isdigit(insert_data[0]) and
+					len(insert_data[1]) <= 50 and
+					len(insert_data[2]) <= 50 and
+					len(insert_data[3]) <= 50 and
+					len(insert_data[4]) <= 30 and
+					len(insert_data[5]) <= 20 and
+					len(insert_data[6]) <= 20 and
+					len(insert_data[7]) <= 20 and
+					len(insert_data[8]) <= 15):
+					user_option_data = {'orderid': insert_data[0],
+										'client': insert_data[1], 
+										'rfd': insert_data[2], 
+										'ard': insert_data[3], 
+										'accountmanager': insert_data[4], 
+										'po': insert_data[5], 
+										'rr': insert_data[6],
+										'rts': insert_data[7],
+										'status': insert_data[8]}
+					
+					sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+					sql_connection.commit()
+					client_connection.sendall("Successfully completed the operation!")
+				else:
+					client_connection.sendall("Something's wrong with the data sent")
+					print(datetime.datetime.now())
+					print("Something's wrong with the data sent")
+					print(insert_data)
+					print("\n")
 				
 			elif (option == "InsertNewOrderDate"):
-				user_option_data = {'orderid': insert_data[0],
-									'dateordered': insert_data[1],
-									'datedue': insert_data[2],
-									'remarks': insert_data[3]}
-				
-				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
-				sql_connection.commit()
-				client_connection.sendall("Successfully completed the operation!")
+				if (str.isdigit(insert_data[0]) and
+					len(insert_data[1]) == 10 and
+					len(insert_data[2]) == 10 and
+					len(insert_data[3]) <= 300):
+					user_option_data = {'orderid': insert_data[0],
+										'dateordered': insert_data[1],
+										'datedue': insert_data[2],
+										'remarks': insert_data[3]}
+					
+					sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+					sql_connection.commit()
+					client_connection.sendall("Successfully completed the operation!")
+				else:
+					client_connection.sendall("Something's wrong with the data sent")
+					print(datetime.datetime.now())
+					print("Something's wrong with the data sent")
+					print(insert_data)
+					print("\n")
 				
 			elif (option == "EditOrderDate"):
-				user_option_data = {'listid': insert_data[0],
-									'orderid': insert_data[1],
-									'dateordered': insert_data[2],
-									'datedue': insert_data[3],
-									'remarks': insert_data[4]}
-				
-				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
-				sql_connection.commit()
-				client_connection.sendall("Successfully completed the operation!")
+				if (str.isdigit(insert_data[0]) and
+					str.isdigit(insert_data[1]) and
+					len(insert_data[2]) == 10 and
+					len(insert_data[3]) == 10 and
+					len(insert_data[4]) <= 300):
+					user_option_data = {'listid': insert_data[0],
+										'orderid': insert_data[1],
+										'dateordered': insert_data[2],
+										'datedue': insert_data[3],
+										'remarks': insert_data[4]}
+					
+					sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+					sql_connection.commit()
+					client_connection.sendall("Successfully completed the operation!")
+				else:
+					client_connection.sendall("Something's wrong with the data sent")
+					print(datetime.datetime.now())
+					print("Something's wrong with the data sent")
+					print(insert_data)
+					print("\n")
 				
 			elif (option == "InsertNewItem"):
-				user_option_data = {'name': insert_data[0],
-									'quantity': insert_data[1], 
-									'serial': insert_data[2], 
-									'source': insert_data[3], 
-									'remarks': insert_data[4], 
-									'status': insert_data[5],
-									'orderid': insert_data[6]}
-				
-				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
-				sql_connection.commit()
-				
-				sqlcursor.execute(make_query("InsertNewItemB.sql"), user_option_data)
-				sql_connection.commit()
-				client_connection.sendall("Successfully completed the operation!")
+				if (len(insert_data[0]) <= 150 and
+					str.isdigit(insert_data[1]) and
+					len(insert_data[2]) <= 300 and
+					len(insert_data[3]) <= 100 and
+					len(insert_data[4]) <= 300 and
+					len(insert_data[5]) <= 15 and
+					str.isdigit(insert_data[6])):
+					user_option_data = {'name': insert_data[0],
+										'quantity': insert_data[1], 
+										'serial': insert_data[2], 
+										'source': insert_data[3], 
+										'remarks': insert_data[4], 
+										'status': insert_data[5],
+										'orderid': insert_data[6]}
+					
+					sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+					sql_connection.commit()
+					
+					sqlcursor.execute(make_query("InsertNewItemB.sql"), user_option_data)
+					sql_connection.commit()
+					client_connection.sendall("Successfully completed the operation!")
+				else:
+					client_connection.sendall("Something's wrong with the data sent")
+					print(datetime.datetime.now())
+					print("Something's wrong with the data sent")
+					print(insert_data)
+					print("\n")
 				
 			elif (option == "EditItem"):
-				user_option_data = {'itemid': insert_data[0],
-									'name': insert_data[1],
-									'quantity': insert_data[2], 
-									'serial': insert_data[3], 
-									'source': insert_data[4], 
-									'remarks': insert_data[5], 
-									'status': insert_data[6]}
-				
-				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
-				sql_connection.commit()
-				client_connection.sendall("Successfully completed the operation!")
+				if (str.isdigit(insert_data[0]) and
+					len(insert_data[1]) <= 150 and
+					str.isdigit(insert_data[2]) and
+					len(insert_data[3]) <= 300 and
+					len(insert_data[4]) <= 100 and
+					len(insert_data[5]) <= 300 and
+					len(insert_data[6]) <= 15):
+					user_option_data = {'itemid': insert_data[0],
+										'name': insert_data[1],
+										'quantity': insert_data[2], 
+										'serial': insert_data[3], 
+										'source': insert_data[4], 
+										'remarks': insert_data[5], 
+										'status': insert_data[6]}
+					
+					sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+					sql_connection.commit()
+					client_connection.sendall("Successfully completed the operation!")
+				else:
+					client_connection.sendall("Something's wrong with the data sent")
+					print(datetime.datetime.now())
+					print("Something's wrong with the data sent")
+					print(insert_data)
+					print("\n")
 			
 			elif (option == "InsertNewUnitPart"):
-				user_option_data = {'itemid': insert_data[0],
-									'part': insert_data[1],
-									'serial': insert_data[2]}
-				
-				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
-				sql_connection.commit()
-				client_connection.sendall("Successfully completed the operation!")
+				if (str.isdigit(insert_data[0]) and
+					len(insert_data[1]) <= 100 and
+					len(insert_data[2]) <= 300):
+					user_option_data = {'itemid': insert_data[0],
+										'part': insert_data[1],
+										'serial': insert_data[2]}
+					
+					sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+					sql_connection.commit()
+					client_connection.sendall("Successfully completed the operation!")
+				else:
+					client_connection.sendall("Something's wrong with the data sent")
+					print(datetime.datetime.now())
+					print("Something's wrong with the data sent")
+					print(insert_data)
+					print("\n")
 			
 			elif (option == "EditUnitPart"):
-				user_option_data = {'listid': insert_data[0],
-									'itemid': insert_data[1],
-									'part': insert_data[2],
-									'serial': insert_data[3]}
-				
-				sqlcursor.execute(make_query(option+'.sql'), user_option_data)
-				sql_connection.commit()
-				client_connection.sendall("Successfully completed the operation!")
+				if (str.isdigit(insert_data[0]) and
+					str.isdigit(insert_data[1]) and
+					len(insert_data[2]) <= 100 and
+					len(insert_data[3]) <= 300):
+					user_option_data = {'listid': insert_data[0],
+										'itemid': insert_data[1],
+										'part': insert_data[2],
+										'serial': insert_data[3]}
+					
+					sqlcursor.execute(make_query(option+'.sql'), user_option_data)
+					sql_connection.commit()
+					client_connection.sendall("Successfully completed the operation!")
+				else:
+					client_connection.sendall("Something's wrong with the data sent")
+					print(datetime.datetime.now())
+					print("Something's wrong with the data sent")
+					print(insert_data)
+					print("\n")
 			
 			elif (option == "DeleteOrder"):
 				user_option_data = {'orderid': insert_data[0]}
