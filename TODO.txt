@@ -1,2 +1,0 @@
-users appear to be entering very long serial numbers
-added a try-except while loop to wait for pool to replenish connections
